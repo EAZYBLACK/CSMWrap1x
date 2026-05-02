@@ -8,6 +8,7 @@
 #include <iommu.h>
 #include <apic.h>
 #include <pci.h>
+#include <pir.h>
 #include <config.h>
 #include <oprom.h>
 #include <flanterm.h>
@@ -622,6 +623,9 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 
     /* Build BBS table with boot device prioritized */
     build_bbs_table(&priv, ImageHandle);
+
+    /* Build $PIR table from ACPI _PRT for legacy PCI BIOS callers */
+    pir_init(&priv);
 
     printf("CALL16 %x:%x\n", priv.csm_efi_table->Compatibility16CallSegment,
             priv.csm_efi_table->Compatibility16CallOffset);
