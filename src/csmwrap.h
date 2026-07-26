@@ -50,7 +50,7 @@ bool acpi_init(struct csmwrap_priv *priv);
 bool acpi_namespace_init(void);
 int build_e820_map(struct csmwrap_priv *priv, EFI_MEMORY_DESCRIPTOR *memory_map, UINTN memory_map_size, UINTN descriptor_size);
 int apply_intel_platform_workarounds(void);
-
+void __attribute__((noreturn)) panic(const char *fmt, ...);
 
 static inline int
 efi_guidcmp (EFI_GUID left, EFI_GUID right)

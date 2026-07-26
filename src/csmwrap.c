@@ -480,7 +480,7 @@ void __attribute__((noreturn)) panic(const char *fmt, ...)
     printf("\n*** PANIC: ");
     va_list l;
     va_start(l, fmt);
-    vprintf(fmt, l);
+    printf(fmt, l);
     va_end(l);
     printf("*** System halted.\n");
     for (;;) { asm volatile("hlt"); }
