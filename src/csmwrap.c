@@ -475,6 +475,17 @@ int set_smbios_table()
     return 0;
 }
 
+void __attribute__((noreturn)) panic(const char *fmt, ...)
+{
+    printf("\n*** PANIC: ");
+    va_list l;
+    va_start(l, fmt);
+    vprintf(fmt, l);
+    va_end(l);
+    printf("*** System halted.\n");
+    for (;;) { asm volatile("hlt"); }
+}
+
 EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 {
     EFI_PHYSICAL_ADDRESS HiPmm;
